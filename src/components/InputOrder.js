@@ -1,57 +1,44 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { DataContext } from "../context";
 
-const InputOrder = ({ setreload, close, setClose, foodId, storeId }) => {
+const InputOrder = ({ setClose, currentFood, currentStore }) => {
   const [studentId, setStudentId] = useState("");
-  const [foodName, setFoodName] = useState("");
-  const [body, setBody] = useState({});
-  const { renderItems } = useContext(DataContext);
+  const { renderItemsV2, newRenderItemsV2 } = useContext(DataContext);
 
   const addNewOrder = (e) => {
-    const storeName = document.getElementById(storeId).innerText;
-    setBody({
-      studentId: studentId,
-      food: {
-        name: foodName,
-        id: foodId,
-      },
-      store: {
-        name: storeName,
-        id: storeId,
-      },
-    });
+    const newOrder = [...currentFood.order, studentId];
+    const targetFood = currentStore.food.indexOf(currentFood);
+    const targetStore = renderItemsV2.indexOf(currentStore);
+    let payload = [...renderItemsV2];
+    payload[targetStore].food[targetFood].order = newOrder;
+    newRenderItemsV2({ type: "newOrder", payload });
 
-    e.preventDefault();
+    // fetch(url + "post/storeData", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(payload),
+    // })
+    //   .then((res) => {
+    //     return res;
+    //   })
+    //   .then((e) => {
+    //     console.log("update data to mongoDB:sucess");
+    //   })
+    //   .catch((e) => {
+    //     console.log("update data to mongoDB:fail");
+    //     console.log(e);
+    //   });
+    // localStorage.setItem("renderItems", JSON.stringify(payload));
 
-    fetch(renderItems.url + "post/newOrder2", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    })
-      .then((res) => {
-        return res;
-      })
-      .then((e) => {
-        console.log(e);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
     setClose(false);
-    setreload(true);
   };
 
-  useEffect(() => {
-    if (foodId) {
-      setFoodName(document.getElementById(foodId).firstChild.innerText);
-    }
-  }, [close]);
   return (
     <fieldset className="input">
       <legend>
         <strong>訂購</strong>
       </legend>
-      <p>{foodName}</p>
+      <p>{currentFood.name}</p>
       <input
         type="number"
         placeholder="請輸入座號"

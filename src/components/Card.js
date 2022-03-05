@@ -1,19 +1,20 @@
-import React, { useEffect, useState, useContext } from "react";
-import { DataContext } from "../context";
+import React, { useState } from "react";
 import InputFood from "./InputFood";
 import InputOrder from "./InputOrder";
 
-const Card = ({ store, index, storeId }) => {
+const Card = ({ store }) => {
   const [closeFoodForm, setFoodForm] = useState(true);
   const [closeOrderForm, setOrderForm] = useState(true);
-  const [foodId, setFoodId] = useState("");
-  const { renderItems, newRenderItems } = useContext(DataContext);
-  const [reload, setreload] = useState(true);
+
+  const [currentFood, setFood] = useState("");
 
   //btn function
   const addNewOrder = (e) => {
     e.preventDefault();
-    setFoodId(e.target.parentElement.getAttribute("id"));
+    let newObj = store.food.filter(
+      (food) => food.name === e.target.parentElement.getAttribute("id")
+    );
+    setFood(...newObj);
     setOrderForm(!closeOrderForm);
   };
   const addNewFood = (e) => {
@@ -21,50 +22,27 @@ const Card = ({ store, index, storeId }) => {
     setFoodForm(!closeFoodForm);
   };
 
-  useEffect(() => {
-    //fetch food list by store id
-    fetch(renderItems.url + "get/foodListByStoreid/" + store._id, {
-      method: "GET",
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        newRenderItems({ type: "foodByStore", payload: data });
-        return data;
-      })
-      .catch((e) => {
-        console.log(e);
-        return e;
-      });
-  }, [reload]);
-
   return (
     <article className="card">
-      <h3 id={storeId}>{store.name}</h3>
+      <h3 id={store.name}>{store.name}</h3>
       <img className="menu" src={store.menuUrl} alt="連結無法讀取" />
       <div className="list">
         <table>
           <tbody>
-            {renderItems.foodByStore[index] ? (
-              renderItems.foodByStore[index].map((item) => {
-                return (
-                  <tr key={item.name} id={item._id}>
-                    <td>{item.name}</td>
-                    <td>{item.price}</td>
-                    <td className="btn" onClick={addNewOrder}>
-                      訂購
-                    </td>
-                  </tr>
-                );
-              })
+            {store.food ? (
+              store.food.map((food) => (
+                <tr key={food.name} id={food.name}>
+                  <td>{food.name ? food.name : "點選下方新增餐點"}</td>
+                  <td>{food.price}</td>
+                  <td className="btn" onClick={addNewOrder}>
+                    訂購
+                  </td>
+                </tr>
+              ))
             ) : (
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
+              <tr></tr>
             )}
+
             <tr>
               <td className="btn" onClick={addNewFood}>
                 ＋新增品項
@@ -73,20 +51,17 @@ const Card = ({ store, index, storeId }) => {
           </tbody>
         </table>
         <div className={closeOrderForm ? "close" : "open"}>
-          {/* <InputOrder setClose={setOrderForm} close={closeOrderForm} /> */}
           <InputOrder
-            storeId={storeId}
-            foodId={foodId}
-            close={closeOrderForm}
-            setreload={setreload}
+            currentStore={store}
+            currentFood={currentFood}
+            setClose={setOrderForm}
           />
         </div>
         <div className={closeFoodForm ? "close" : "open"}>
           <InputFood
             setClose={setFoodForm}
             close={closeFoodForm}
-            currentStore={storeId}
-            setreload={setreload}
+            currentStore={store}
           />
         </div>
       </div>

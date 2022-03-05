@@ -1,67 +1,74 @@
 import React, { useState, useContext } from "react";
 import { DataContext } from "../context";
 
-const InputFood = ({ setreload, setClose, currentStore }) => {
-  const { renderItems } = useContext(DataContext);
+const InputFood = ({ setClose, currentStore }) => {
+  const { renderItemsV2, newRenderItemsV2 } = useContext(DataContext);
   const [food, setFood] = useState("");
   const [price, setPrice] = useState("");
 
   const addNewFood = (e) => {
-    const body = { name: food, store: currentStore, price: price };
+    if (!food || !price) {
+      alert("餐點或價格請勿留白。");
+      return;
+    }
+    if (price > 1000 || price < 1) {
+      alert("價格有效範圍為 (1-1000) 。");
+      return;
+    }
+    const newFood = [
+      ...currentStore.food,
+      { name: food, price: price, order: [] },
+    ];
+    const targetStore = renderItemsV2.indexOf(currentStore);
+    let payload = [...renderItemsV2];
+    payload[targetStore].food = newFood;
+    newRenderItemsV2({ type: "newFood", payload });
     e.preventDefault();
-    console.log("nweFood:", body);
-    fetch(renderItems.url + "post/newFood", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    })
-      .then((res) => {
-        return res;
-      })
-      .then((e) => {
-        console.log(e);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+
+    // fetch(url + "post/storeData", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(payload),
+    // })
+    //   .then((res) => {
+    //     return res;
+    //   })
+    //   .then((e) => {
+    //     console.log("update data to mongoDB:sucess");
+    //   })
+    //   .catch((e) => {
+    //     console.log("update data to mongoDB:fail");
+    //     console.log(e);
+    //   });
+    // localStorage.setItem("renderItems", JSON.stringify(payload));
     setClose(true);
-    setreload(true);
   };
 
-  // useEffect(() => {
-  //   fetch(renderItems.url + "get/foodListByStoreid/" + currentStore, {
-  //     method: "GET",
-  //   })
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // }, []);
   return (
     <fieldset className="input">
       <legend>
         <strong>新增品項 | 價錢</strong>
       </legend>
+      <p>
+        <strong>{currentStore.name}</strong>
+      </p>
       <input
         type="text"
         placeholder="請輸入品項"
         onChange={(e) => {
           setFood(e.target.value);
         }}
+        required
       />
       <input
         type="number"
         placeholder="請輸入價錢"
+        required
         onChange={(e) => {
           setPrice(e.target.value);
         }}
       />
-      <a href="#" onClick={addNewFood}>
+      <a href="#menu" onClick={addNewFood}>
         新增
       </a>
     </fieldset>

@@ -1,32 +1,52 @@
 import React, { useState, useContext } from "react";
 import { DataContext } from "../context";
 
-const InputMenu = ({ setreload, setClose }) => {
-  const { renderItems } = useContext(DataContext);
+const InputMenu = ({ setClose }) => {
+  const { renderItemsV2, newRenderItemsV2 } = useContext(DataContext);
   const [store, setStore] = useState("");
   const [menu, setMenu] = useState("");
 
   const handleSubmit = (e) => {
+    if (!store || !menu) {
+      alert(" 餐廳 與 菜單連結 請勿留白。");
+      return;
+    }
+    let menuExist = renderItemsV2.filter((preStore) => preStore.name === store);
+    console.log(menuExist);
+    if (menuExist[0]) {
+      alert("餐廳已存在，請重新確認。");
+      return;
+    }
     e.preventDefault();
-    const body = { name: store, menuUrl: menu };
-    fetch(renderItems.url + "post/newStore", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    })
-      .then((res) => {
-        return res;
-      })
-      .then((e) => {
-        console.log(e);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    setClose(true);
-    setreload(true);
-  };
+    const newStore = {
+      name: store,
+      menuUrl: menu,
+      food: [],
+    };
+    console.log("newStore:", newStore);
+    let payload = [...renderItemsV2, newStore];
 
+    newRenderItemsV2({ type: "newMenu", payload });
+
+    // fetch(url + "post/storeData", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(payload),
+    // })
+    //   .then((res) => {
+    //     return res;
+    //   })
+    //   .then((e) => {
+    //     console.log("update data to mongoDB:sucess", payload);
+    //   })
+    //   .catch((e) => {
+    //     console.log("update data to mongoDB:fail");
+    //     console.log(e);
+    //   });
+    // localStorage.setItem("renderItems", JSON.stringify(payload));
+
+    setClose(true);
+  };
   return (
     <div className="input">
       <a
