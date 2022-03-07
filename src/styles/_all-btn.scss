@@ -1,0 +1,35 @@
+a,
+a:visited {
+  // display: inline-block;
+  text-decoration: none;
+  // padding: 0 1rem;
+  color: rgba(0, 0, 0, 0.8);
+  // line-height: 1.1rem;
+  text-align: center;
+  transition: all 0.1s ease-in;
+}
+a:hover {
+  transform: translateY(-0.1rem);
+}
+a:active {
+  transform: translateY(0rem);
+}
+
+a.addMenu-btn {
+  background-color: rgba(255, 255, 255, 1);
+  width: 10rem;
+  // margin: auto;
+  border-radius: 3rem;
+  padding: 0.5rem;
+  // position: absolute;
+  // top: 1rem;
+  // right: 1rem;
+  float: right;
+  margin: -1.2rem 0.5rem 0 0;
+}
+
+a.addMenu-btn:hover {
+  background-color: rgb(85, 85, 85);
+  color: white;
+  transform: scale(1.1);
+}

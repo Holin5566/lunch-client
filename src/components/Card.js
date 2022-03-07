@@ -25,46 +25,57 @@ const Card = ({ store }) => {
   return (
     <article className="card">
       <h3 id={store.name}>{store.name}</h3>
-      <img className="menu" src={store.menuUrl} alt="連結無法讀取" />
-      <div className="list">
-        <table>
-          <tbody>
-            {store.food ? (
-              store.food.map((food) => (
-                <tr key={food.name} id={food.name}>
-                  <td>{food.name ? food.name : "點選下方新增餐點"}</td>
-                  <td>{food.price}</td>
-                  <td className="btn" onClick={addNewOrder}>
-                    訂購
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr></tr>
-            )}
-
-            <tr>
-              <td className="btn" onClick={addNewFood}>
-                ＋新增品項
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div className={closeOrderForm ? "close" : "open"}>
-          <InputOrder
-            currentStore={store}
-            currentFood={currentFood}
-            setClose={setOrderForm}
-          />
+      <div className="content">
+        <div className="menu">
+          <img src={store.menuUrl} alt="連結無法讀取" />
         </div>
-        <div className={closeFoodForm ? "close" : "open"}>
-          <InputFood
-            setClose={setFoodForm}
-            close={closeFoodForm}
-            currentStore={store}
-          />
+        <div className="list">
+          <table>
+            <tbody>
+              {store.food ? (
+                store.food.map((food) => (
+                  <tr key={food.name} id={food.name}>
+                    <td>{food.name ? food.name : "點選下方新增餐點"}</td>
+                    <td>{food.price}</td>
+                    <td className="btn" onClick={addNewOrder}>
+                      訂購
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr></tr>
+              )}
+
+              <tr>
+                <td className="btn" onClick={addNewFood}>
+                  ＋新增品項
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div className={closeOrderForm ? "close" : "open"}>
+            <InputOrder
+              currentStore={store}
+              currentFood={currentFood}
+              setClose={setOrderForm}
+            />
+          </div>
+          <div className={closeFoodForm ? "close" : "open"}>
+            <InputFood
+              setClose={setFoodForm}
+              close={closeFoodForm}
+              currentStore={store}
+            />
+          </div>
         </div>
       </div>
+      <p className="ps">
+        * 如需刪除資料請聯繫作者信箱 :
+        <a href="mailto:s1030320chl@gmail.com">s1030320chl @gmail.com</a> *
+      </p>
+      <p className="ps">
+        <a href="mailto:s1030320chl@gmail.com">點我聯繫</a>
+      </p>
     </article>
   );
 };

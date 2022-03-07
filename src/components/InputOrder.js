@@ -12,25 +12,7 @@ const InputOrder = ({ setClose, currentFood, currentStore }) => {
     let payload = [...renderItemsV2];
     payload[targetStore].food[targetFood].order = newOrder;
     newRenderItemsV2({ type: "newOrder", payload });
-
-    // fetch(url + "post/storeData", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(payload),
-    // })
-    //   .then((res) => {
-    //     return res;
-    //   })
-    //   .then((e) => {
-    //     console.log("update data to mongoDB:sucess");
-    //   })
-    //   .catch((e) => {
-    //     console.log("update data to mongoDB:fail");
-    //     console.log(e);
-    //   });
-    // localStorage.setItem("renderItems", JSON.stringify(payload));
-
-    setClose(false);
+    setClose(true);
   };
 
   return (

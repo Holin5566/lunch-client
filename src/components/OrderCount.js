@@ -3,8 +3,8 @@ import React, { Fragment } from "react";
 const skipZero = (food) => {
   if (food.order.length) {
     return (
-      <li key={food.name}>
-        {food.name}｜ {food.order.length} 份
+      <li key={food.name} className="orderCount">
+        <p>{food.name}｜</p> <p>{food.order.length} 份</p>
       </li>
     );
   }

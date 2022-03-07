@@ -10,7 +10,16 @@ const Menu = () => {
   return (
     <div id="menu">
       <h2>| MENU</h2>
-      <hr />
+      <a
+        onClick={(e) => {
+          setClose(!setClose);
+          e.preventDefault();
+        }}
+        href="#menu"
+        className="addMenu-btn"
+      >
+        新增店家｜菜單
+      </a>
       {renderItemsV2 ? (
         renderItemsV2.map((store) => {
           return <Card key={store.name} store={store} />;
@@ -18,16 +27,7 @@ const Menu = () => {
       ) : (
         <Fragment></Fragment>
       )}
-      <a
-        onClick={(e) => {
-          setClose(!setClose);
-          e.preventDefault();
-        }}
-        href="#menu"
-        className="btn"
-      >
-        新增店家｜菜單
-      </a>
+
       <div className={close ? "close" : "filter"}>
         <InputMenu setClose={setClose} />
       </div>

@@ -22,14 +22,14 @@ const Aside = () => {
   return (
     <aside>
       <ul>
-        <h4>當前訂單: {orderTotal()} 份</h4>
-        <br />
-
+        <div className="title">
+          <h4>當前訂單：</h4> <h4>{orderTotal()} 份</h4>
+        </div>
         {renderItemsV2 ? (
           renderItemsV2.map((store) => {
             return (
               <Fragment key={store.name}>
-                <h3>{store.name}</h3>
+                <h5>{store.name}</h5>
                 <OrderCount currentStore={store} />
               </Fragment>
             );

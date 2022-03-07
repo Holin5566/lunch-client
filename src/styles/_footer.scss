@@ -1,0 +1,18 @@
+footer {
+  background-color: hsla(0, 0%, 50%, 0.8);
+  text-align: center;
+  // padding: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  // position: fixed;
+  z-index: 999;
+  // bottom: 0;
+  // width: 100%;
+  overflow: auto;
+  .author {
+    margin: 1.8rem 0 0;
+  }
+  .contact {
+    margin: 1rem 1rem 1rem;
+    font-size: 0.95rem;
+  }
+}

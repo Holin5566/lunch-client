@@ -1,4 +1,4 @@
-import "./styles/style.css";
+import "./styles/index.css";
 import Header from "./layouts/Header";
 import Aside from "./layouts/Aside";
 import Footer from "./layouts/Footer";
@@ -7,8 +7,8 @@ import Menu from "./components/Menu";
 import { useEffect, useReducer } from "react";
 import { DataContext } from "./context";
 
-// const url = "https://mylunchapp.heroknpuapp.com/";
-const url = "http://localhost:8080/";
+const url = "https://mylunchapp.herokuapp.com/";
+// const url = "http://localhost:8080/";
 
 const initRenderV2 = [];
 //test render

@@ -1,0 +1,172 @@
+.card {
+  padding: 1rem;
+  text-align: center;
+  h3 {
+    background-color: rgba(255, 255, 255);
+    border: 1px solid gray;
+    width: 10rem;
+    margin: 1rem auto;
+    padding: 0.3rem;
+    margin-bottom: 0.3rem;
+    border-radius: 3rem;
+  }
+  .content {
+    margin: 2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    // width: 100vw;
+    .menu {
+      width: 50%;
+      img {
+        width: 100%;
+        box-shadow: 0.5rem 0.5rem 0px 0px rgba(0, 0, 0, 0.4);
+      }
+    }
+    .list {
+      //   display: inline-block;
+      width: 50%;
+      table {
+        margin: 2rem auto;
+        width: 80%;
+      }
+
+      tr {
+        padding: 0.5rem;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.8);
+      }
+      tr:nth-child(2n + 1) {
+        background-color: white;
+      }
+      tr:nth-child(2n) {
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+      td.btn {
+        cursor: pointer;
+        box-shadow: 0 0 0.5px 0.5px rgba(0, 0, 0, 0.5);
+        transition: all 0.1s ease-in;
+      }
+      td.btn:hover {
+        background-color: rgb(85, 85, 85);
+        color: white;
+        transform: scale(1.1);
+      }
+      fieldset {
+        legend {
+          text-align: left;
+          margin: 0 1rem;
+          color: rgba(0, 0, 0, 0.7);
+        }
+        width: 50%;
+        margin: 0.5rem auto;
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 0 3rem;
+        input {
+          margin: 1rem 0.3rem;
+          display: block;
+          margin: 1rem auto;
+          font-size: 1.1rem;
+        }
+        a {
+          margin-bottom: 0.5rem;
+          padding: 0.1rem 0.5rem;
+          box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5);
+          font-size: 1rem;
+          width: auto;
+          color: rgba(0, 0, 0, 0.7);
+          background-color: rgba(255, 255, 255);
+          border-radius: 3rem;
+        }
+      }
+    }
+  }
+  p.ps,
+  p.ps a {
+    font-size: 0.8rem;
+    color: rgba(0, 15, 99, 0.5);
+    margin: 0.2rem;
+  }
+}
+
+// a.menu {
+//   width: 50%;
+// }
+.menu-view {
+  // max-width: 50%;
+  width: 100%;
+  margin: 0.5rem auto;
+  box-shadow: 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+  // float: left;
+}
+
+// .list {
+//   display: inline-block;
+//   width: 50%;
+//   table {
+//     margin: 2rem auto;
+//     width: 80%;
+//   }
+
+//   tr {
+//     padding: 0.5rem;
+//     text-align: center;
+//     color: rgba(0, 0, 0, 0.8);
+//   }
+//   tr:nth-child(2n + 1) {
+//     background-color: white;
+//   }
+//   tr:nth-child(2n) {
+//     background-color: rgba(255, 255, 255, 0.5);
+//   }
+//   td.btn {
+//     cursor: pointer;
+//     box-shadow: 0 0 0.5px 0.5px rgba(0, 0, 0, 0.5);
+//   }
+//   td.btn:hover {
+//     background-color: rgb(85, 85, 85);
+//     color: white;
+//     transform: scale(1.1);
+//   }
+//   fieldset {
+//     legend {
+//       text-align: left;
+//       margin: 0 1rem;
+//       color: rgba(0, 0, 0, 0.7);
+//     }
+//     width: 50%;
+//     margin: 0.5rem auto;
+//     background-color: rgba(255, 255, 255, 0.5);
+//     padding: 0 3rem;
+//     input {
+//       margin: 1rem 0.3rem;
+//       display: block;
+//       margin: 1rem auto;
+//       font-size: 1.1rem;
+//     }
+//     a {
+//       margin-bottom: 0.5rem;
+//       padding: 0.1rem 0.5rem;
+//       box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5);
+//       font-size: 1rem;
+//       width: auto;
+//       color: rgba(0, 0, 0, 0.7);
+//       background-color: rgba(255, 255, 255);
+//       border-radius: 3rem;
+//     }
+//   }
+// }
+
+@media (max-width: 500px) {
+  .card {
+    .content {
+      img.menu {
+        width: 100%;
+      }
+      .list {
+        width: 100%;
+      }
+    }
+  }
+}
