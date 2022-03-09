@@ -5,6 +5,7 @@ const InputOrder = ({ setClose, currentFood, currentStore }) => {
   const [studentId, setStudentId] = useState("");
   const { renderItemsV2, newRenderItemsV2 } = useContext(DataContext);
 
+  // dispatch new order to reducer
   const addNewOrder = (e) => {
     const newOrder = [...currentFood.order, studentId];
     const targetFood = currentStore.food.indexOf(currentFood);
@@ -16,7 +17,7 @@ const InputOrder = ({ setClose, currentFood, currentStore }) => {
   };
 
   return (
-    <fieldset className="input">
+    <fieldset className="input moveDown">
       <legend>
         <strong>訂購</strong>
       </legend>
@@ -28,7 +29,7 @@ const InputOrder = ({ setClose, currentFood, currentStore }) => {
           setStudentId(e.target.value);
         }}
       />
-      <a href="#menu" onClick={addNewOrder}>
+      <a href="#" onClick={addNewOrder}>
         下單
       </a>
     </fieldset>

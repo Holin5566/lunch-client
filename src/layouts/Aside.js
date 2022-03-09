@@ -5,6 +5,7 @@ import { DataContext } from "../context";
 const Aside = () => {
   const { renderItemsV2 } = useContext(DataContext);
 
+  // count total order
   const orderTotal = () => {
     let total = 0;
     if (renderItemsV2) {
@@ -21,7 +22,7 @@ const Aside = () => {
 
   return (
     <aside>
-      <ul>
+      <ul className="shadow">
         <div className="title">
           <h4>當前訂單：</h4> <h4>{orderTotal()} 份</h4>
         </div>

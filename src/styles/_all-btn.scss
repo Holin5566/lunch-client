@@ -1,12 +1,10 @@
 a,
 a:visited {
-  // display: inline-block;
   text-decoration: none;
-  // padding: 0 1rem;
   color: rgba(0, 0, 0, 0.8);
-  // line-height: 1.1rem;
   text-align: center;
-  transition: all 0.1s ease-in;
+  transition: all 0.05s ease-in;
+  user-select: none;
 }
 a:hover {
   transform: translateY(-0.1rem);
@@ -14,7 +12,12 @@ a:hover {
 a:active {
   transform: translateY(0rem);
 }
-
+.btn {
+  user-select: none;
+}
+.btn:hover {
+  font-weight: bolder;
+}
 a.addMenu-btn {
   background-color: rgba(255, 255, 255, 1);
   width: 10rem;
@@ -28,8 +31,62 @@ a.addMenu-btn {
   margin: -1.2rem 0.5rem 0 0;
 }
 
+.editStoreBtn {
+  background-color: white;
+  border: 0.1rem solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.5rem;
+  display: block;
+  width: 6rem;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 1rem 1rem 1rem auto;
+}
+#orderView .uploadBtn {
+  background-color: rgba(29, 29, 29, 0.8);
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  color: white;
+  margin: 0 0 0 auto;
+}
+.deleteBtn:hover {
+  background-color: rgba(192, 27, 27, 0.8);
+  color: white;
+}
+
 a.addMenu-btn:hover {
   background-color: rgb(85, 85, 85);
   color: white;
-  transform: scale(1.1);
+}
+
+#orderView {
+  ul {
+    a {
+      transition: all 1s ease-in;
+    }
+    .name_li::after {
+      content: " ]";
+      opacity: 0;
+      transition: all 0.2s ease-in;
+    }
+    .name_li::before {
+      content: "[ ";
+      opacity: 0;
+      transition: all 0.2s ease-in;
+    }
+    .name_li:hover::after {
+      opacity: 1;
+    }
+    .name_li:hover::before {
+      opacity: 1;
+    }
+    .name_li_current {
+      transition: all 0.2s ease-in;
+    }
+    .name_li_current::after {
+      content: " ]";
+    }
+    .name_li_current::before {
+      content: "[ ";
+    }
+  }
 }

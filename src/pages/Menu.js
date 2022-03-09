@@ -1,6 +1,6 @@
 import React, { useState, useContext, Fragment } from "react";
-import Card from "./Card";
-import InputMenu from "./InputMenu";
+import Card from "../components/Card";
+import InputMenu from "../components/InputMenu";
 import { DataContext } from "../context";
 
 const Menu = () => {

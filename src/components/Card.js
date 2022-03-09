@@ -8,7 +8,7 @@ const Card = ({ store }) => {
 
   const [currentFood, setFood] = useState("");
 
-  //btn function
+  //dispatch new order to reducer
   const addNewOrder = (e) => {
     e.preventDefault();
     let newObj = store.food.filter(
@@ -17,6 +17,8 @@ const Card = ({ store }) => {
     setFood(...newObj);
     setOrderForm(!closeOrderForm);
   };
+
+  //dispatch new food to reducer
   const addNewFood = (e) => {
     e.preventDefault();
     setFoodForm(!closeFoodForm);
@@ -24,7 +26,9 @@ const Card = ({ store }) => {
 
   return (
     <article className="card">
-      <h3 id={store.name}>{store.name}</h3>
+      <h3 id={store.name} className="shadow">
+        {store.name}
+      </h3>
       <div className="content">
         <div className="menu">
           <img src={store.menuUrl} alt="連結無法讀取" />
@@ -53,26 +57,32 @@ const Card = ({ store }) => {
               </tr>
             </tbody>
           </table>
-          <div className={closeOrderForm ? "close" : "open"}>
-            <InputOrder
-              currentStore={store}
-              currentFood={currentFood}
-              setClose={setOrderForm}
-            />
-          </div>
-          <div className={closeFoodForm ? "close" : "open"}>
-            <InputFood
-              setClose={setFoodForm}
-              close={closeFoodForm}
-              currentStore={store}
-            />
+          <div className="hidden">
+            {closeOrderForm ? (
+              ""
+            ) : (
+              <InputOrder
+                currentStore={store}
+                currentFood={currentFood}
+                setClose={setOrderForm}
+              />
+            )}
+            {closeFoodForm ? (
+              ""
+            ) : (
+              <InputFood
+                setClose={setFoodForm}
+                close={closeFoodForm}
+                currentStore={store}
+              />
+            )}
           </div>
         </div>
       </div>
-      <p className="ps">
+      {/* <p className="ps">
         * 如需刪除資料請聯繫作者信箱 :
         <a href="mailto:s1030320chl@gmail.com">s1030320chl @gmail.com</a> *
-      </p>
+      </p> */}
       <p className="ps">
         <a href="mailto:s1030320chl@gmail.com">點我聯繫</a>
       </p>

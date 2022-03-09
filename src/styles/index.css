@@ -6,14 +6,53 @@
 body {
   background-color: #f3eed9;
   background: url(../img/background.jpg) fixed center center;
-  background-size: 1920px;
+  background-size: cover;
   background-repeat: no-repeat;
   font-family: "Noto Sans TC", sans-serif;
   font-size: 1.2rem;
 }
 
+.noSelect {
+  cursor: pointer;
+}
+
 .app {
   height: 100vh;
+}
+
+p.ps,
+p.ps a {
+  font-size: 0.9rem;
+  color: rgba(0, 15, 99, 0.5);
+  margin: 0.2rem;
+  margin: 0.5rem auto;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.shadow {
+  box-shadow: 0 0 0.2rem black;
+}
+
+.tdHidden {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+th,
+img {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .right {
@@ -21,13 +60,45 @@ body {
   margin: 1rem;
 }
 
-.close {
-  height: 0;
+.hidden {
   overflow: hidden;
 }
 
+.close {
+  overflow: hidden;
+  height: 0;
+}
+
 .open {
+  height: auto;
   margin-bottom: 3rem;
+}
+
+.current {
+  opacity: 1;
+}
+
+@-webkit-keyframes MoveDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes MoveDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.moveDown {
+  -webkit-animation: MoveDown 0.2s ease-in;
+          animation: MoveDown 0.2s ease-in;
+  position: relative;
 }
 
 .filter {
@@ -39,44 +110,27 @@ body {
   height: 100vh;
   z-index: 1000;
 }
-.filter .input {
-  width: 60vw;
-  height: 80vh;
-  margin: 5vh auto;
-  background-color: rgba(255, 255, 255, 0.9);
+
+@-webkit-keyframes Show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-.filter .input h2 {
-  padding-top: 2rem;
+
+@keyframes Show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-.filter .input .text {
-  margin: auto;
-  width: 80%;
-}
-.filter .input .text input {
-  line-height: 1.5rem;
-  margin: 0.5rem;
-  font-size: 1.1rem;
-}
-.filter .input .text input.url {
-  width: 80%;
-}
-.filter .input .submit {
-  background-color: rgba(255, 255, 255, 0.5);
-  width: 6rem;
-  padding: 0.3rem;
-  display: block;
-  margin: 1rem auto;
-  border-radius: 3rem;
-}
-.filter .input .back {
-  margin: 0.5rem 0;
-}
-.filter .input .view {
-  height: 60%;
-  width: 80%;
-  margin: 5% auto;
-  background-color: rgba(102, 102, 102, 0.8);
-  overflow: auto;
+.editOrder {
+  -webkit-animation: Show 0.5s ease-in;
+          animation: Show 0.5s ease-in;
 }
 
 a,
@@ -84,7 +138,11 @@ a:visited {
   text-decoration: none;
   color: rgba(0, 0, 0, 0.8);
   text-align: center;
-  transition: all 0.1s ease-in;
+  transition: all 0.05s ease-in;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 a:hover {
@@ -93,6 +151,17 @@ a:hover {
 
 a:active {
   transform: translateY(0rem);
+}
+
+.btn {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.btn:hover {
+  font-weight: bolder;
 }
 
 a.addMenu-btn {
@@ -104,10 +173,62 @@ a.addMenu-btn {
   margin: -1.2rem 0.5rem 0 0;
 }
 
+.editStoreBtn {
+  background-color: white;
+  border: 0.1rem solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.5rem;
+  display: block;
+  width: 6rem;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 1rem 1rem 1rem auto;
+}
+
+#orderView .uploadBtn {
+  background-color: rgba(29, 29, 29, 0.8);
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  color: white;
+  margin: 0 0 0 auto;
+}
+
+.deleteBtn:hover {
+  background-color: rgba(192, 27, 27, 0.8);
+  color: white;
+}
+
 a.addMenu-btn:hover {
   background-color: #555555;
   color: white;
-  transform: scale(1.1);
+}
+
+#orderView ul a {
+  transition: all 1s ease-in;
+}
+#orderView ul .name_li::after {
+  content: " ]";
+  opacity: 0;
+  transition: all 0.2s ease-in;
+}
+#orderView ul .name_li::before {
+  content: "[ ";
+  opacity: 0;
+  transition: all 0.2s ease-in;
+}
+#orderView ul .name_li:hover::after {
+  opacity: 1;
+}
+#orderView ul .name_li:hover::before {
+  opacity: 1;
+}
+#orderView ul .name_li_current {
+  transition: all 0.2s ease-in;
+}
+#orderView ul .name_li_current::after {
+  content: " ]";
+}
+#orderView ul .name_li_current::before {
+  content: "[ ";
 }
 
 header {
@@ -146,9 +267,10 @@ header nav a {
   width: 75vw;
 }
 .container main {
-  background-color: rgba(208, 208, 208, 0.7);
+  background-color: rgba(208, 208, 208, 0.9);
   flex: 3;
   padding: 3rem;
+  min-height: 71.5vh;
   margin-top: 7rem;
 }
 
@@ -192,17 +314,64 @@ main #total {
   overflow: auto;
 }
 
+.filter .input {
+  width: 60vw;
+  min-width: 360px;
+  min-height: 80vh;
+  margin: 5vh auto;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 1rem;
+}
+.filter .input h2 {
+  padding-top: 2rem;
+}
+.filter .input .text {
+  margin: 1rem auto;
+}
+.filter .input .text input {
+  line-height: 1.5rem;
+  margin: 0.5rem;
+  font-size: 1.1rem;
+}
+.filter .input .submit {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 6rem;
+  padding: 0.3rem;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.filter .input .submit:hover {
+  box-shadow: 0 0 0.1rem black;
+}
+.filter .input .view {
+  width: 95%;
+  margin: 1rem auto;
+  background-color: rgba(156, 156, 156, 0.8);
+  max-height: 55vh;
+  overflow: auto;
+}
+.filter .input .view p {
+  margin: 0;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.filter .input .view img {
+  margin: 0;
+  box-shadow: none;
+}
+
 .card {
   padding: 1rem;
   text-align: center;
 }
 .card h3 {
   background-color: white;
-  border: 1px solid gray;
   width: 10rem;
   margin: 1rem auto;
   padding: 0.3rem;
-  margin-bottom: 0.3rem;
   border-radius: 3rem;
 }
 .card .content {
@@ -250,11 +419,12 @@ main #total {
   width: 50%;
   margin: 0.5rem auto;
   background-color: rgba(255, 255, 255, 0.5);
-  padding: 0 3rem;
+  padding: 0 3rem 1rem;
+  border-radius: 1rem;
 }
 .card .content .list fieldset legend {
   text-align: left;
-  margin: 0 1rem;
+  margin: 0;
   color: rgba(0, 0, 0, 0.7);
 }
 .card .content .list fieldset input {
@@ -266,18 +436,15 @@ main #total {
 .card .content .list fieldset a {
   margin-bottom: 0.5rem;
   padding: 0.1rem 0.5rem;
-  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5);
   font-size: 1rem;
   width: auto;
   color: rgba(0, 0, 0, 0.7);
   background-color: white;
   border-radius: 3rem;
 }
-.card p.ps,
-.card p.ps a {
-  font-size: 0.8rem;
-  color: rgba(0, 15, 99, 0.5);
-  margin: 0.2rem;
+.card .content .list fieldset a:hover {
+  font-weight: normal;
+  box-shadow: 0 0 0.1rem black;
 }
 
 .menu-view {
@@ -288,10 +455,118 @@ main #total {
 }
 
 @media (max-width: 500px) {
-  .card .content img.menu {
+  .card .content .menu {
     width: 100%;
   }
   .card .content .list {
+    width: 100%;
+  }
+}
+#orderView ul {
+  display: flex;
+  list-style: none;
+  text-align: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#orderView ul li,
+#orderView ul h3 {
+  margin: 0;
+  padding: 0.3rem 1rem;
+}
+#orderView ul li {
+  margin: 0.2rem;
+  border-radius: 0.3rem;
+}
+#orderView ul .name_li,
+#orderView ul .name_li_current {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+#orderView ul .name_li a,
+#orderView ul .name_li_current a {
+  pointer-events: none;
+}
+#orderView .detail {
+  min-height: 40vh;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#orderView .detail div.menu {
+  width: 50%;
+}
+#orderView .detail div.menu img {
+  width: 100%;
+}
+#orderView .detail div.menu p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 1rem;
+}
+#orderView .detail div.menu p span {
+  background-color: white;
+  padding: 1rem;
+  margin: 0.3rem;
+}
+#orderView .detail .list {
+  width: 50%;
+  padding: 1rem;
+  margin-bottom: auto;
+  text-align: center;
+}
+#orderView .detail .list table {
+  width: 100%;
+}
+#orderView .detail .list table tbody th {
+  background-color: rgba(29, 29, 29, 0.8);
+  color: white;
+}
+#orderView .detail .list table tbody tr {
+  background-color: white;
+}
+#orderView .detail .list table tbody tr.order {
+  background-color: rgba(255, 255, 255, 0);
+}
+#orderView .detail .list table tbody tr.order td {
+  background-color: rgba(199, 219, 255, 0.5);
+}
+#orderView .detail .list table tbody tr.order td.order {
+  box-shadow: 0 0 0.1rem black inset;
+}
+#orderView .detail .list table tbody tr.order td.cancel {
+  background-color: white;
+}
+#orderView .detail .list table tbody tr.order td.cancel a {
+  pointer-events: none;
+}
+#orderView .detail .list table tbody tr.order td.cancel:hover {
+  box-shadow: 0 0 0.2rem white inset;
+  outline: 1px solid rgba(0, 0, 0, 0.5);
+  background-color: rgba(192, 27, 27, 0.8);
+  color: rgba(255, 255, 255, 0.8);
+}
+#orderView .detail .list table tbody td.btn {
+  cursor: pointer;
+  box-shadow: 0 0 0.5px 0.5px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in;
+}
+#orderView .detail .list table tbody td.btn a {
+  pointer-events: none;
+}
+#orderView .detail .list table tbody td.btn:hover {
+  box-shadow: 0 0 0.5rem black;
+  font-weight: normal;
+}
+
+@media (max-width: 500px) {
+  #orderView div.detail div.menu {
+    width: 100%;
+  }
+  #orderView div.detail div.list {
     width: 100%;
   }
 }

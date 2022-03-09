@@ -6,6 +6,7 @@ const InputFood = ({ setClose, currentStore }) => {
   const [food, setFood] = useState("");
   const [price, setPrice] = useState("");
 
+  // dispatch new food to reducer
   const addNewFood = (e) => {
     if (!food || !price) {
       alert("餐點或價格請勿留白。");
@@ -24,28 +25,11 @@ const InputFood = ({ setClose, currentStore }) => {
     payload[targetStore].food = newFood;
     newRenderItemsV2({ type: "newFood", payload });
     e.preventDefault();
-
-    // fetch(url + "post/storeData", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(payload),
-    // })
-    //   .then((res) => {
-    //     return res;
-    //   })
-    //   .then((e) => {
-    //     console.log("update data to mongoDB:sucess");
-    //   })
-    //   .catch((e) => {
-    //     console.log("update data to mongoDB:fail");
-    //     console.log(e);
-    //   });
-    // localStorage.setItem("renderItems", JSON.stringify(payload));
     setClose(true);
   };
 
   return (
-    <fieldset className="input">
+    <fieldset className="input moveDown">
       <legend>
         <strong>新增品項 | 價錢</strong>
       </legend>
@@ -68,7 +52,7 @@ const InputFood = ({ setClose, currentStore }) => {
           setPrice(e.target.value);
         }}
       />
-      <a href="#menu" onClick={addNewFood}>
+      <a href="#" onClick={addNewFood}>
         新增
       </a>
     </fieldset>

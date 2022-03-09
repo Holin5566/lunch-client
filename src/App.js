@@ -2,9 +2,11 @@ import "./styles/index.css";
 import Header from "./layouts/Header";
 import Aside from "./layouts/Aside";
 import Footer from "./layouts/Footer";
-import Menu from "./components/Menu";
-// import Total from "./components/Total";
+import Menu from "./pages/Menu";
+import OrderView from "./pages/OrderView";
 import { useEffect, useReducer } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { DataContext } from "./context";
 
 const url = "https://mylunchapp.herokuapp.com/";
@@ -27,6 +29,7 @@ const initRenderV2 = [];
 // ];
 
 function App() {
+  // function for post to mongoDB
   const postToDB = (payload) => {
     fetch(url + "post/storeData", {
       method: "POST",
@@ -48,6 +51,7 @@ function App() {
   //reducer v2
   const renderReducerV2 = (renderItemsV2, action) => {
     switch (action.type) {
+      // handle add new data
       case "newMenu": {
         console.log("newMenu:", action.payload);
         postToDB(action.payload);
@@ -63,8 +67,34 @@ function App() {
         postToDB(action.payload);
         return action.payload;
       }
+      // get data from mongoDB
       case "mongoDB": {
         console.log("mongoDB:", action.payload);
+        postToDB(action.payload);
+        return action.payload;
+      }
+      // handle edit data
+      case "editOrder": {
+        const { newOrder, sotreIndex, foodIndex } = action.payload;
+        console.log("editOrder:", action.payload);
+        let newItems = [...renderItemsV2];
+        newItems[sotreIndex].food[foodIndex].order = newOrder;
+        return newItems;
+      }
+      case "editFood": {
+        const { newFood, sotreIndex, foodIndex } = action.payload;
+        console.log("editFood:", action.payload);
+        let newItems = [...renderItemsV2];
+        newItems[sotreIndex].food = newFood;
+        return newItems;
+      }
+      case "editStore": {
+        const { newStore } = action.payload;
+        console.log("editStore:", action.payload);
+        return newStore;
+      }
+      //handle update to mongoDB
+      case "update": {
         postToDB(action.payload);
         return action.payload;
       }
@@ -78,6 +108,7 @@ function App() {
     initRenderV2
   );
 
+  // get data from DB when open this site
   useEffect(() => {
     fetch(url + "get/storeData", {
       method: "GET",
@@ -99,21 +130,22 @@ function App() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("renderItems", JSON.stringify(renderItemsV2));
-  // }, [renderItemsV2]);
-
   return (
     <div className="App">
       <DataContext.Provider value={{ renderItemsV2, newRenderItemsV2, url }}>
-        <Header />
-        <div className="container">
-          <main>
-            <Menu />
-          </main>
-          <Aside />
-        </div>
-        <Footer />
+        <BrowserRouter>
+          <Header />
+          <div className="container">
+            <main className="shadow">
+              <Routes>
+                <Route path="/" element={<Menu />} />
+                <Route path="/overView" element={<OrderView />} />
+              </Routes>
+            </main>
+            <Aside />
+          </div>
+          <Footer />
+        </BrowserRouter>
       </DataContext.Provider>
     </div>
   );

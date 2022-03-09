@@ -6,6 +6,7 @@ const InputMenu = ({ setClose }) => {
   const [store, setStore] = useState("");
   const [menu, setMenu] = useState("");
 
+  // dispatch new store to reducer
   const handleSubmit = (e) => {
     if (!store || !menu) {
       alert(" 餐廳 與 菜單連結 請勿留白。");
@@ -27,28 +28,10 @@ const InputMenu = ({ setClose }) => {
     let payload = [...renderItemsV2, newStore];
 
     newRenderItemsV2({ type: "newMenu", payload });
-
-    // fetch(url + "post/storeData", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(payload),
-    // })
-    //   .then((res) => {
-    //     return res;
-    //   })
-    //   .then((e) => {
-    //     console.log("update data to mongoDB:sucess", payload);
-    //   })
-    //   .catch((e) => {
-    //     console.log("update data to mongoDB:fail");
-    //     console.log(e);
-    //   });
-    // localStorage.setItem("renderItems", JSON.stringify(payload));
-
     setClose(true);
   };
   return (
-    <div className="input">
+    <div className="input shadow">
       <a
         onClick={(e) => {
           e.preventDefault();
@@ -59,7 +42,7 @@ const InputMenu = ({ setClose }) => {
       >
         <strong>ｘ</strong>
       </a>
-      <h2>｜NEW MENU</h2>
+      <h2>｜NEW</h2>
       <div className="text">
         <label>新增店名：</label>
         <input
@@ -83,8 +66,8 @@ const InputMenu = ({ setClose }) => {
           送出
         </a>
       </div>
-      <div className="view">
-        預覽圖
+      <div className="view shadow">
+        <p>預覽圖</p>
         {menu ? (
           <img className="menu-view " src={menu} alt="無法讀取網址" />
         ) : (

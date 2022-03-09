@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 
+// return the list for each food's order, and skip the empty order
 const skipZero = (food) => {
   if (food.order.length) {
     return (

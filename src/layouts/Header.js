@@ -1,12 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header>
+    <header className="shadow">
       <h1>TODAY'S MENU</h1>
       <nav>
-        {/* <a href="#menu">菜單預覽</a>
-        <a href="#total">金額統計</a> */}
+        <Link className="btn" to="/">
+          菜單預覽
+        </Link>
+        <Link className="btn" to="/overView">
+          訂單總覽
+        </Link>
+        <a className="btn" href="https://github.com/Holin5566/lunch-client">
+          Github
+        </a>
       </nav>
     </header>
   );
