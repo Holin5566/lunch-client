@@ -83,9 +83,9 @@ const Card = ({ store }) => {
         * 如需刪除資料請聯繫作者信箱 :
         <a href="mailto:s1030320chl@gmail.com">s1030320chl @gmail.com</a> *
       </p> */}
-      <p className="ps">
+      {/* <p className="ps">
         <a href="mailto:s1030320chl@gmail.com">點我聯繫</a>
-      </p>
+      </p> */}
     </article>
   );
 };

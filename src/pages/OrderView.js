@@ -3,7 +3,7 @@ import { DataContext } from "../context";
 import Edit from "../components/Edit";
 
 const OrderView = () => {
-  const { renderItemsV2, newRenderItemsV2 } = useContext(DataContext);
+  const { renderItemsV2 } = useContext(DataContext);
   const [currentStore, setCurrentStore] = useState([...renderItemsV2][0]);
 
   const pickStore = (e) => {
