@@ -18,7 +18,6 @@ const InputMenu = ({ setClose }) => {
       alert("餐廳已存在，請重新確認。");
       return;
     }
-    e.preventDefault();
     const newStore = {
       name: store,
       menuUrl: menu,
@@ -28,6 +27,8 @@ const InputMenu = ({ setClose }) => {
     let payload = [...renderItemsV2, newStore];
 
     newRenderItemsV2({ type: "newMenu", payload });
+    e.preventDefault();
+
     setClose(true);
   };
   return (

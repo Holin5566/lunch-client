@@ -60,6 +60,7 @@ const EditOrder = ({ currentFood, currentStore }) => {
       type: "editFood",
       payload: { newFood, sotreIndex, foodIndex },
     });
+    e.preventDefault();
   };
 
   return (

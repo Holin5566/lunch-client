@@ -13,6 +13,7 @@ const InputOrder = ({ setClose, currentFood, currentStore }) => {
     let payload = [...renderItemsV2];
     payload[targetStore].food[targetFood].order = newOrder;
     newRenderItemsV2({ type: "newOrder", payload });
+    e.preventDefault();
     setClose(true);
   };
 

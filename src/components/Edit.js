@@ -6,7 +6,7 @@ const Edit = ({ currentStore }) => {
   const { renderItemsV2, newRenderItemsV2 } = useContext(DataContext);
 
   // dispatch edit store to reducer
-  const editStore = () => {
+  const editStore = (e) => {
     if (!window.confirm("確定刪除 '" + currentStore.name + "' ?")) {
       return;
     }
@@ -18,14 +18,16 @@ const Edit = ({ currentStore }) => {
       type: "editStore",
       payload: { newStore },
     });
+    e.preventDefault();
   };
 
   // dispatch update to reducer
-  const handleUpdate = () => {
+  const handleUpdate = (e) => {
     if (!window.confirm("變更即將保存，確定保存變更?")) {
       return;
     }
     newRenderItemsV2({ type: "update", payload: renderItemsV2 });
+    e.preventDefault();
   };
 
   if (currentStore) {
@@ -58,15 +60,15 @@ const Edit = ({ currentStore }) => {
               })}
             </tbody>
           </table>
-          <p className="ps">* 點擊餐點名稱以刪除 *</p>
+          <p className="ps">* 點擊餐點名稱以刪除。刪除完成後請保存變更。 *</p>
           <a
             className="noSelect  editStoreBtn deleteBtn"
-            href="#"
+            href="#orderView"
             onClick={editStore}
           >
             刪除店家
           </a>
-          <a href="#" className="uploadBtn" onClick={handleUpdate}>
+          <a href="#orderView" className="uploadBtn" onClick={handleUpdate}>
             保存變更
           </a>
           {/* <a className=" uploadBtn" href="#" onClick={handleUpdate}>
