@@ -5,8 +5,8 @@ import Footer from "./layouts/Footer";
 import Menu from "./pages/Menu";
 import OrderView from "./pages/OrderView";
 import { useEffect, useReducer } from "react";
-import { BrowserRouter } from "react-router-dom";
-import { Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { DataContext } from "./context";
 
 const url = "https://mylunchapp.herokuapp.com/";
@@ -79,18 +79,21 @@ function App() {
         console.log("editOrder:", action.payload);
         let newItems = [...renderItemsV2];
         newItems[sotreIndex].food[foodIndex].order = newOrder;
+        // postToDB(newItems);
         return newItems;
       }
       case "editFood": {
-        const { newFood, sotreIndex, foodIndex } = action.payload;
+        const { newFood, sotreIndex } = action.payload;
         console.log("editFood:", action.payload);
         let newItems = [...renderItemsV2];
         newItems[sotreIndex].food = newFood;
+        // postToDB(newItems);
         return newItems;
       }
       case "editStore": {
         const { newStore } = action.payload;
         console.log("editStore:", action.payload);
+        // postToDB(newStore);
         return newStore;
       }
       //handle update to mongoDB
@@ -133,7 +136,7 @@ function App() {
   return (
     <div className="App">
       <DataContext.Provider value={{ renderItemsV2, newRenderItemsV2, url }}>
-        <BrowserRouter>
+        <HashRouter>
           <Header />
           <div className="container">
             <main className="shadow">
@@ -145,7 +148,7 @@ function App() {
             <Aside />
           </div>
           <Footer />
-        </BrowserRouter>
+        </HashRouter>
       </DataContext.Provider>
     </div>
   );

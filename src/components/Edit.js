@@ -58,6 +58,7 @@ const Edit = ({ currentStore }) => {
               })}
             </tbody>
           </table>
+          <p className="ps">* 點擊餐點名稱以刪除 *</p>
           <a
             className="noSelect  editStoreBtn deleteBtn"
             href="#"
@@ -65,9 +66,12 @@ const Edit = ({ currentStore }) => {
           >
             刪除店家
           </a>
-          <a className=" uploadBtn" href="#" onClick={handleUpdate}>
+          <a href="#" className="uploadBtn" onClick={handleUpdate}>
             保存變更
           </a>
+          {/* <a className=" uploadBtn" href="#" onClick={handleUpdate}>
+            保存變更
+          </a> */}
         </div>
         {/* <p className="ps">* 點擊欲刪除物件以刪除 *</p> */}
       </div>

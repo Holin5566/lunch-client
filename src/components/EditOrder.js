@@ -41,10 +41,10 @@ const EditOrder = ({ currentFood, currentStore }) => {
     e.preventDefault();
   };
 
-  const handleAdd = (e) => {
-    console.log(e.target);
-    e.preventDefault();
-  };
+  // const handleAdd = (e) => {
+  //   console.log(e.target);
+  //   e.preventDefault();
+  // };
 
   // dispatch editFood to reducer
   const deleteFood = (e) => {
@@ -74,6 +74,15 @@ const EditOrder = ({ currentFood, currentStore }) => {
         </td>
       </tr>
       {open ? (
+        <tr className="order editOrder">
+          <td className="tdHidden"></td>
+          <td className="tdHidden"></td>
+          <td className="tdHidden"></td>
+        </tr>
+      ) : (
+        <Fragment></Fragment>
+      )}
+      {open ? (
         currentFood.order.map((order) => {
           return (
             <tr key={key++} className="order editOrder">
@@ -92,11 +101,16 @@ const EditOrder = ({ currentFood, currentStore }) => {
         <tr className="order editOrder">
           <td className="tdHidden"></td>
           <td className="tdHidden"></td>
-          <td className="btn noSelect" title="尚無功能" onClick={handleAdd}>
-            新增
-          </td>
+          <td className="tdHidden"></td>
         </tr>
       ) : (
+        // <tr className="order editOrder">
+        //   <td className="tdHidden"></td>
+        //   <td className="tdHidden"></td>
+        //   <td className="btn noSelect" title="尚無功能" onClick={handleAdd}>
+        //     新增
+        //   </td>
+        // </tr>
         <Fragment></Fragment>
       )}
     </Fragment>
